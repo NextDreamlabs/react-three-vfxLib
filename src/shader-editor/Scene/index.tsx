@@ -1,3 +1,11 @@
+/*
+ * @Author: lvy lvy
+ * @Date: 2023-03-26 16:08:26
+ * @LastEditors: lvy lvy
+ * @LastEditTime: 2023-03-27 23:07:23
+ * @FilePath: /vfx-composer-examples/src/shader-editor/Scene/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { Canvas } from 'react-three-fiber'
 

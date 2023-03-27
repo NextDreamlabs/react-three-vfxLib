@@ -2,7 +2,7 @@
  * @Author: lvy lvy
  * @Date: 2023-03-27 01:30:34
  * @LastEditors: lvy lvy
- * @LastEditTime: 2023-03-27 01:46:33
+ * @LastEditTime: 2023-03-27 02:01:43
  * @FilePath: /vfx-composer-examples/src/core/store.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,4 +21,22 @@ export type TransformControlsSpaceType = 'world' | 'local';
 export type StoreType = {
   scene: Scene | null | undefined,
   sceneSnapshot: Scene | null | undefined,
+  webgl: WebGLRenderer | null
+  initStore: (webGl: WebGLRenderer, scene: Scene) => void,
+  setEffectTransform: (Name: string, transform: Matrix4) => void
 }
+
+const storeConfig: StateCreator<StoreType> = (get, set) => {
+  return {
+    scene: null,
+    sceneSnapshot: null,
+    webgl: null,
+    initStore: () => {
+
+    },
+    setEffectTransform: (Name, transform) => {
+
+    }
+  }
+}
+export const useEditorStore = create<StoreType>(storeConfig);
