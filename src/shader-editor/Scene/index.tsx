@@ -2,16 +2,28 @@
  * @Author: lvy lvy
  * @Date: 2023-03-26 16:08:26
  * @LastEditors: lvy lvy
- * @LastEditTime: 2023-03-27 23:07:23
+ * @LastEditTime: 2023-03-29 01:47:05
  * @FilePath: /vfx-composer-examples/src/shader-editor/Scene/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
-import { Canvas } from 'react-three-fiber'
-
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  ComponentProps,
+} from 'react'
+import VS from '../../core/ProxyManager'
+import { Canvas, useThree } from 'react-three-fiber'
+import InteriorPanel from '../Panels/InteriorPanel'
 import { GridHelper } from 'three'
 import { OrbitControls, Select, useKeyboardControls } from '@react-three/drei'
 import TransformControls from '../../core/TransformControls'
+/**
+ *
+ * @param param0
+ */
+
 export default function Scene() {
   const groupRef = useRef()
   const [selected, setSelected] = useState(null)
@@ -19,19 +31,9 @@ export default function Scene() {
   const transformRef = useRef()
   const [transformMode, setTransformMode] = useState('translate')
 
-  // return (
-  //   <div>
-  //     <div ref={ref}>
-  //       <h2>Hello</h2>
-  //     </div>
-  //   </div>
-  // )
-  // 在加载完毕后更新状态
-  // useLayoutEffect(() => {
-  //   console.log(meshRef.current, 'meshRef.current')
-  // }, [])
   return (
     <>
+      <InteriorPanel></InteriorPanel>
       <Canvas
         onDoubleClick={(e) => e.preventDefault()}
         onClick={(e) => {
@@ -49,7 +51,25 @@ export default function Scene() {
           enabled={!selected}
         ></OrbitControls>
         <gridHelper args={[10000, 10000]} />
-        <mesh
+        <VS.Mesh
+          name="test"
+          ref={groupRef}
+          onDoubleClick={(e) => {
+            e.stopPropagation()
+            setSelected(groupRef)
+            setMesh(groupRef)
+            alert(1)
+          }}
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelected(groupRef)
+            setMesh(groupRef)
+          }}
+        >
+          <boxGeometry />
+          <meshBasicMaterial color={'red'} />
+        </VS.Mesh>
+        {/* <mesh
           ref={groupRef}
           onDoubleClick={(e) => {
             e.stopPropagation()
@@ -64,7 +84,7 @@ export default function Scene() {
         >
           <boxGeometry />
           <meshBasicMaterial color={'red'} />
-        </mesh>
+        </mesh> */}
         {selected && mesh && (
           <TransformControls
             mode={transformMode}
