@@ -2,7 +2,7 @@
  * @Author: lvy lvy
  * @Date: 2023-03-25 17:44:04
  * @LastEditors: lvy lvy
- * @LastEditTime: 2023-03-28 20:35:07
+ * @LastEditTime: 2023-03-30 13:02:12
  * @FilePath: /vfx-composer-examples/src/shader-editor/Panels/idnex.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,8 +13,9 @@ import { useEditorStore } from '../../core/store'
 import { Radio, Space, Card } from 'antd'
 
 export default function InteriorPanel() {
-  const [TransformControlsMode] = useEditorStore((state) => [
+  const [TransformControlsMode, scene] = useEditorStore((state) => [
     state.TransformControlsMode,
+    state.scene,
   ])
   const FiexdCard = styled.div`
     top: 10px;
@@ -39,8 +40,11 @@ export default function InteriorPanel() {
             value={TransformControlsMode}
           >
             <Space direction="horizontal">
+              {/* {scene}123 */}
               {['translate', 'rotate', 'scale'].map((_) => (
-                <Radio value={_}>{_}</Radio>
+                <Radio key={_} value={_}>
+                  {_}
+                </Radio>
               ))}
             </Space>
           </Radio.Group>
